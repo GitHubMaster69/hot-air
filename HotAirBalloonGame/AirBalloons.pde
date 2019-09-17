@@ -25,15 +25,11 @@ class AirBalloons {
     velocity.add(acceleration);
     location.add(velocity);
     velocity.mult(0.99);
-    acceleration.mult(0.7);
+    acceleration.mult(0.5);
   }
   
     void applyForce(PVector force) {
     PVector f = force;
     acceleration.add(f);
-  }
-  
-  void cannonShot(){
-  bombs.add(new Bomb(3,180.0+location.x,height-138.0,mouseX-100, -mouseY+540));
   }
 }
