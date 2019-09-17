@@ -19,7 +19,7 @@ void draw() {
 
 void loadImages() {
   for (int i = 0; i < 2; i++) {
-    images[i] = loadImage(str(i) + ".PNG");
+    images[i] = loadImage(str(i) + ".png");
   }
 }
 
