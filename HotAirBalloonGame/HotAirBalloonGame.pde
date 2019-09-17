@@ -8,11 +8,11 @@ void setup() {
   frameRate(60);
   balloons.add(new AirBalloons(100, 100, 1));
   balloons.add(new AirBalloons(width-400, 100, 1));
+  loadImages();
 }
 
 void draw() {
   background(150);
-  loadImages();
   balloonFunctions();
   bombFunctions();
 }
