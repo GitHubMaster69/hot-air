@@ -35,10 +35,10 @@ void balloonFunctions() {
       balloon.acceleration.add(0, -0.4);
       println("zoom");
     } else if (keyCode == LEFT) {
-      balloon.velocity.add(-0.1, 0);
+      balloon.acceleration.add(-0.1, 0);
       println("left");
     } else if (keyCode == RIGHT) {
-      balloon.velocity.add(0.1, 0);
+      balloon.acceleration.add(0.1, 0);
       println("right");
     } else if (key == ENTER) {
       balloon.cannonShot();
