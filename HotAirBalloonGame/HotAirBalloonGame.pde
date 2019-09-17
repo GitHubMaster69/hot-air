@@ -4,10 +4,10 @@ ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 PVector gravity = new PVector(0, 0.1);
 
 void setup() {
+  fullScreen(1);
   frameRate(60);
-  size(1400, 800);
   balloons.add(new AirBalloons(100, 100, 1));
-  balloons.add(new AirBalloons(600, 100, 1));
+  balloons.add(new AirBalloons(width-400, 100, 1));
 }
 
 void draw() {
@@ -27,6 +27,7 @@ void balloonFunctions() {
   for (int i = 0; i < images.length; i++) {
     AirBalloons balloon = balloons.get(i);
     balloon.update();
+    balloon.checkEdges();
     balloon.applyForce(gravity);
     balloon.drawAirBalloon();
     if (keyPressed){

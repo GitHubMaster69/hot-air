@@ -36,4 +36,28 @@ class AirBalloons {
   void cannonShot(){
   bombs.add(new Bomb(3,180.0+location.x,height-138.0,mouseX-100, -mouseY+540));
   }
+  
+    void checkEdges() {
+    if (location.x > width-50) {
+      location.x = 0;
+      acceleration.x = 0;
+      velocity.x *= -0.95;
+    } else if (location.x < 50) {
+      velocity.x *= 0;
+      location.x = 50;
+      acceleration.x = 0;
+    }
+    if (location.y > height-350) {
+      velocity.y *= 0;
+      location.y = height-350;
+      if (velocity.y > -3) {
+        velocity.y = 0;
+      }
+    } else if (location.y < 0) {
+      velocity.y *= 0;
+      location.y = 0;
+      acceleration.y = 0;
+    }
+  }
+
   }
