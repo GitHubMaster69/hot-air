@@ -13,11 +13,20 @@ class AirBalloons {
     speedMult = s;
     number = balloons.size();
   }
+<<<<<<< Updated upstream
   
   void drawAirBalloon(){
     translate(location.x,location.y);
     image(images[number],0,0);
     translate(-location.x,-location.y);
+=======
+
+  void drawAirBalloon() {
+    translate(location.x, location.y);
+    images[number].resize(int(600*0.5),int(800*0.5));
+    image(images[number], 0, 0);
+    translate(-location.x, -location.y);
+>>>>>>> Stashed changes
   }
 
 
