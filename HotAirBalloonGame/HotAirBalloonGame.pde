@@ -4,22 +4,22 @@ ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 PVector gravity = new PVector(0, 0.1);
 
 void setup() {
-  frameRate(60);
+  frameRate(48);
   size(1400, 800);
+  loadImages();
   balloons.add(new AirBalloons(100, 100, 1));
   balloons.add(new AirBalloons(600, 100, 1));
 }
 
 void draw() {
   background(150);
-  loadImages();
   balloonFunctions();
   bombFunctions();
 }
 
 void loadImages() {
   for (int i = 0; i < 2; i++) {
-    images[i] = loadImage(str(i) + ".png");
+    images[i] = loadImage(str(i) + ".PNG");
   }
 }
 
@@ -27,6 +27,7 @@ void balloonFunctions() {
   for (int i = 0; i < images.length; i++) {
     AirBalloons balloon = balloons.get(i);
     balloon.update();
+    balloon.checkEdges();
     balloon.applyForce(gravity);
     balloon.drawAirBalloon();
     if (keyPressed){
