@@ -1,21 +1,21 @@
 class AirBalloons {
-  
+
   PVector location;
-  PVector velocity = new PVector(0,0);
-  PVector acceleration = new PVector(0,0);
+  PVector velocity = new PVector(0, 0);
+  PVector acceleration = new PVector(0, 0);
   int speedMult;
   int number;
   int shotsMax = 5;
   int shotsLeft = 5;
-  
-  AirBalloons(int x, int y, int s){ 
-    location = new PVector(x,y);
+
+  AirBalloons(int x, int y, int s) { 
+    location = new PVector(x, y);
     speedMult = s;
     number = balloons.size();
   }
   void drawAirBalloon() {
     translate(location.x, location.y);
-    images[number].resize(int(600*0.5),int(800*0.5));
+    images[number].resize(int(600*0.5), int(800*0.5));
     image(images[number], 0, 0);
     translate(-location.x, -location.y);
   }
@@ -26,18 +26,27 @@ class AirBalloons {
     location.add(velocity);
     velocity.mult(0.99);
     acceleration.mult(0.7);
+    if (keys[0+(number*3)] == true) {
+      acceleration.y += -0.2;
+    }
+    if (keys[1+(number*3)] == true) {
+      acceleration.x += -0.1;
+    }
+    if (keys[2+(number*3)] == true) {
+      acceleration.x += 0.1;
+    }
   }
-  
-    void applyForce(PVector force) {
+
+  void applyForce(PVector force) {
     PVector f = force;
     acceleration.add(f);
   }
-  
-  void cannonShot(){
-  bombs.add(new Bomb(6,180.0+location.x,height-138.0,mouseX-100, -mouseY+540));
+
+  void cannonShot() {
+    bombs.add(new Bomb(6, 180.0+location.x, height-138.0, mouseX-100, -mouseY+540));
   }
-  
-    void checkEdges() {
+
+  void checkEdges() {
     if (location.x > width-250) {
       location.x = width-250;
       acceleration.x = 0;
@@ -47,9 +56,9 @@ class AirBalloons {
       location.x = -50;
       acceleration.x = 0;
     }
-    if (location.y > height-350) {
+    if (location.y > height-250) {
       velocity.y *= 0;
-      location.y = height-350;
+      location.y = height-250;
       if (velocity.y > -3) {
         velocity.y = 0;
       }
@@ -59,5 +68,4 @@ class AirBalloons {
       acceleration.y = 0;
     }
   }
-
-  }
+}
