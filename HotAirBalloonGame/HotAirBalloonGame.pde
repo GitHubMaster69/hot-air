@@ -2,13 +2,14 @@ PImage[] images = new PImage[2];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 PVector gravity = new PVector(0, 0.1);
+PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0,0), new PVector(0,0)};
 boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
 
 
 void setup() {
-  size(1400,800);
+  fullScreen(1);
   frameRate(60);
   balloons.add(new AirBalloons(100, 100, 1));
   balloons.add(new AirBalloons(width-400, 100, 1));
@@ -51,9 +52,9 @@ void bombFunctions() {
   if (bombs.size() > 0) {
     for (int i = 0; i < bombs.size(); i++) {
       Bomb bomb = bombs.get(i);
-      bomb.applyForce(gravity);
+      bomb.applyForce(bombGravity);
       bomb.update();
-      bomb.checkEdges();
+      bomb.checkEdges(i);
       bomb.display();
     }
   }

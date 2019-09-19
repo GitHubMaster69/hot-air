@@ -50,7 +50,7 @@ class Bomb {
     translate(-location.x, -location.y);
   }
 
-  void checkEdges() {
+  void checkEdges(int i) {
     if (location.x > width-size/2) {
       location.x = width-size/2;
       acceleration.x = 0;
@@ -61,8 +61,7 @@ class Bomb {
       acceleration.x = 0;
     }
     if (location.y > height-size/2) {
-      velocity.y *= -0.80;
-      location.y = height-(size/2);
+      bombs.remove(i);
       if(velocity.y > -3){
         velocity.y = 0;
       }

@@ -43,7 +43,7 @@ class AirBalloons {
   }
 
   void cannonShot() {
-    bombs.add(new Bomb(6, 180.0+location.x, height-138.0, mouseX-100, -mouseY+540));
+    bombs.add(new Bomb(6, 180.0+location.x, location.y+150, -350*((number-0.5)*2), 200));
   }
 
   void checkEdges() {
