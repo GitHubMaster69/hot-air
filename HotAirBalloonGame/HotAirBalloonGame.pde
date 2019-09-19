@@ -1,4 +1,4 @@
-PImage[] images = new PImage[2];
+PImage[] images = new PImage[4];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 PVector gravity = new PVector(0, 0.1);
@@ -16,6 +16,7 @@ void setup() {
 }
 
 void draw() {
+  image(images[4],0,0);    //Background image
   background(50);
   balloonFunctions();
   balloonAccel[1].x = 0; 
@@ -25,7 +26,7 @@ void draw() {
 }
 
 void loadImages() {
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < images.length; i++) {
     images[i] = loadImage(str(i) + ".PNG");
   }
 }
