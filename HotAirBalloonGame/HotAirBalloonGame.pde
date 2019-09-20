@@ -7,8 +7,6 @@ PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
 boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
-float frames = 0;
-int time = 0;
 
 
 void setup() {
@@ -72,32 +70,27 @@ void bombFunctions() {
 void keyPressed() {
   if (keyCode == UP) {
     keys[0] = true;
-    println("zoom");
   }
   if (keyCode == LEFT) {
     keys[1] = true;
-    println("left");
   } 
   if (keyCode == RIGHT) {
     keys[2] = true;
-    println("right");
   } 
   if (key == ENTER) {
     shoot[0] = true;
-    println("enter");
   }
   if (key == 'w') {
     keys[3] = true;
-    println("zoom");
-  } else if (key == 'a') {
+  }
+  if (key == 'a') {
     keys[4] = true;
-    println("left");
-  } else if (key == 'd') {
+  }
+  if (key == 'd') {
     keys[5] = true;
-    println("right");
-  } else if (key == 'q') {
+  }
+  if (key == 'q') {
     shoot[1] = true;
-    println("enter");
   }
 }
 

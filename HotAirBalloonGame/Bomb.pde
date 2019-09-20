@@ -35,15 +35,11 @@ class Bomb {
     translate(location.x, location.y);
     rotate(radians(velocity.x+prevRotate));
     fill(224,172,105);
-    rect(40,5,30,10); // ignition coil draw
-    fill(255,0,0);
-    rect(65,5,5,10); //spark draw
+    rect(10,0,10,2); // ignition coil draw
     fill(0);
-    ellipse(0,0,mass*16,mass*16); // bomb draw
-    fill(50,50,50);
-    ellipse(5,5,45,45); //bomb shadow (grey) draw
+    ellipse(0,0,mass*4,mass*4); // bomb draw
     fill(240,240,240);
-    ellipse(10,3,15,15); //bomb shadow (white) draw
+    ellipse(10,3,5,5); //bomb shadow (white) draw
     fill(175);
     rotate(-radians(velocity.x+prevRotate));
     prevRotate += velocity.x;
