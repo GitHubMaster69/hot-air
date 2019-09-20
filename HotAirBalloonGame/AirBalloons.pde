@@ -7,6 +7,7 @@ class AirBalloons {
   int number;
   int shotsMax = 5;
   int shotsLeft = 5;
+  int hp = 100;
 
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
@@ -26,8 +27,9 @@ class AirBalloons {
     location.add(velocity);
     velocity.mult(0.99);
     acceleration.mult(0.7);
-    if (keys[0+(number*3)] == true) {
-      acceleration.y += -0.2;
+    if (keys[0+(number*3)] == true && !done[0+(number*2)]) {
+      acceleration.y += -0.015*hp;
+      done[0+(number*2)] = true;
     }
     if (keys[1+(number*3)] == true) {
       acceleration.x += -0.1;
@@ -43,8 +45,8 @@ class AirBalloons {
   }
 
   void cannonShot() {
-    Bomb bomb = bombs.get((number-1)*(-1));
-    bombs.add(new Bomb(6, 180.0+location.x, location.y+150, -350*((number-0.5)*2), 200));
+    //Bomb bomb = bombs.get((number-1)*(-1));
+    bombs.add(new Bomb(6, 180.0+location.x, location.y+150, 450*((number-0.5)*2), 200));
   }
 
   void checkEdges() {

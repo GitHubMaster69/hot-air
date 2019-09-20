@@ -6,6 +6,7 @@ PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
 boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
+boolean[] done = new boolean[8];
 float frames = 0;
 int time = 0;
 
@@ -13,8 +14,8 @@ int time = 0;
 void setup() {
   fullScreen(1);
   frameRate(144);
-  balloons.add(new AirBalloons(100, 100, 1));
   balloons.add(new AirBalloons(width-400, 100, 1));
+  balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
 }
 
@@ -47,9 +48,10 @@ void balloonFunctions() {
     balloonAccel[i].x = 0; 
     balloonAccel[i].y = 0;
     balloon.drawAirBalloon();
-    if (shoot[i]) {
+    if (shoot[i] && !done[1+(i*2)]) {
       balloon.cannonShot();
       shoot[i] = false;
+      done[1+(i*2)] = true;
     }
   }
 }
@@ -102,6 +104,7 @@ void keyPressed() {
 void keyReleased() {
   if (keyCode == UP) {
     keys[0] = false;
+    done[0] = false;
   }
   if (keyCode == LEFT) {
     keys[1] = false;
@@ -111,9 +114,11 @@ void keyReleased() {
   } 
   if (key == ENTER) {
     shoot[0] = false;
+    done[1] = false;
   }
   if (key == 'w') {
     keys[3] = false;
+    done[2] = false;
   }
   if (key == 'a') {
     keys[4] = false;
@@ -123,5 +128,6 @@ void keyReleased() {
   }
   if (key == 'q') {
     shoot[1] = false;
+    done[3] = false;
   }
 }
