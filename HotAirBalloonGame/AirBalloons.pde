@@ -15,10 +15,10 @@ class AirBalloons {
   }
   void drawAirBalloon() {
     translate(location.x, location.y);
-    images[number].resize(int(600*0.5), int(800*0.5));
+    images[number].resize(int(600*0.25), int(800*0.25));
     image(images[number], 0, 0);
     translate(-location.x, -location.y);
-  }
+  }  
 
 
   void update() {
@@ -43,6 +43,7 @@ class AirBalloons {
   }
 
   void cannonShot() {
+    Bomb bomb = bombs.get((number-1)*(-1));
     bombs.add(new Bomb(6, 180.0+location.x, location.y+150, -350*((number-0.5)*2), 200));
   }
 

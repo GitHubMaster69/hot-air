@@ -1,36 +1,41 @@
-PImage[] images = new PImage[4];
+PImage[] images = new PImage[8];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 PVector gravity = new PVector(0, 0.1);
 PVector bombGravity = new PVector(0, 1);
-PVector[] balloonAccel = {new PVector(0,0), new PVector(0,0)};
+PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
 boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
+float frames = 0;
+int time = 0;
 
 
 void setup() {
   fullScreen(1);
-  frameRate(60);
+  frameRate(144);
   balloons.add(new AirBalloons(100, 100, 1));
   balloons.add(new AirBalloons(width-400, 100, 1));
   loadImages();
 }
 
 void draw() {
-  image(images[4],0,0);    //Background image
-  background(50);
+  background(#45bbd6);
   balloonFunctions();
   balloonAccel[1].x = 0; 
   balloonAccel[1].y = 0;
   bombFunctions();
-  println(keys);
+  text(((1000*frameCount)/millis()), 100, 100);
 }
 
 void loadImages() {
-  for (int i = 0; i < images.length; i++) {
+  for (int i = 0; i < 2; i++) {
     images[i] = loadImage(str(i) + ".PNG");
   }
+  for (int i = 2; i < images.length; i++) {
+    images[i] = loadImage(str(i) + ".png");
+  }
 }
+
 
 void balloonFunctions() {
   for (int i = 0; i < balloons.size(); i++) {
@@ -60,7 +65,6 @@ void bombFunctions() {
     }
   }
 }
-
 
 
 void keyPressed() {
