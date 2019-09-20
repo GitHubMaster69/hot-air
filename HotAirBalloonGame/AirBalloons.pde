@@ -14,10 +14,22 @@ class AirBalloons {
     speedMult = s;
     number = balloons.size();
   }
-  void drawAirBalloon() {
+    void drawAirBalloon() {
     translate(location.x, location.y);
-    images[number].resize(int(600*0.25), int(800*0.25));
+    images[number].resize(int(600*0.4), int(800*0.4));
     image(images[number], 0, 0);
+    images[5].resize(int(600*0.4), int(800*0.4));
+    image(images[5], 0, 0);
+    println(acceleration.y);
+    if ((0 > acceleration.y) && (acceleration.y < 0.15)){
+      images[6].resize(int(600*0.4), int(800*0.4));
+      image(images[6], 0, 0);
+    }
+      else if((0.15 > acceleration.y) && (acceleration.y < 200)){
+      images[7].resize(int(600*0.4), int(800*0.4));
+      image(images[7], 0, 0);
+    }
+    
     translate(-location.x, -location.y);
   }  
 

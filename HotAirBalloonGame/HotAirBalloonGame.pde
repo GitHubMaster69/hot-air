@@ -10,7 +10,8 @@ boolean[] done = new boolean[8];
 
 
 void setup() {
-  fullScreen(1);
+  size(1500,800);
+  //fullScreen(1);
   frameRate(144);
   balloons.add(new AirBalloons(width-400, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
@@ -28,7 +29,7 @@ void draw() {
 
 void loadImages() {
   for (int i = 0; i < 2; i++) {
-    images[i] = loadImage(str(i) + ".PNG");
+    images[i] = loadImage(str(i) + ".png");
   }
   for (int i = 2; i < images.length; i++) {
     images[i] = loadImage(str(i) + ".png");
