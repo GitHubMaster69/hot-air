@@ -1,7 +1,7 @@
 PImage[] images = new PImage[8];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
-PVector gravity = new PVector(0, 0.1);
+PVector gravity = new PVector(0, 0.05);
 PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
 boolean[] keys = new boolean[6];

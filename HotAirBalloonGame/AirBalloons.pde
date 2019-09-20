@@ -28,7 +28,7 @@ class AirBalloons {
     velocity.mult(0.99);
     acceleration.mult(0.7);
     if (keys[0+(number*3)] == true && !done[0+(number*2)]) {
-      acceleration.y += -0.015*hp;
+      acceleration.y += -0.01*hp;
       done[0+(number*2)] = true;
     }
     if (keys[1+(number*3)] == true) {
