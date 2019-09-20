@@ -43,7 +43,7 @@ class AirBalloons {
   }
 
   void cannonShot() {
-    Bomb bomb = bombs.get((number-1)*(-1));
+//Bomb bomb = bombs.get((number-1)*(-1));
     bombs.add(new Bomb(6, 180.0+location.x, location.y+150, -350*((number-0.5)*2), 200));
   }
 
