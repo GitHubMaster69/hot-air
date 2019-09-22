@@ -10,6 +10,7 @@ boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
+boolean restarted;
 
 
 void setup() {
@@ -29,6 +30,10 @@ void draw() {
   targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
   cloudFunctions();
+  if(restarted){
+    delay(2000);
+    restarted = false;
+  }
 }
 
 void loadImages() {
@@ -52,7 +57,7 @@ void balloonFunctions() {
   for (int i = 0; i < balloons.size(); i++) {
     AirBalloons balloon = balloons.get(i);
     balloon.update();
-    balloon.checkEdges();
+    balloon.checkEdges(i);
     balloon.applyForce(gravity);
     balloon.applyForce(balloonAccel[i]);
     balloonAccel[i].x = 0; 
@@ -81,14 +86,23 @@ void bombFunctions() {
     }
   }
 }
+
 void restart() {
+  balloons.clear();
+  targets.clear();
+  clouds.clear();
+  bombs.clear();
   balloons.add(new AirBalloons(width-250, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
   targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
   for (int i = 0; i < 8; i++) {
     clouds.add(new Clouds(int(random(width/4, width*0.75)), int(random(50, height-50))));
   }
+  if(frameCount > 100){
+    restarted = true;
+  }
 }
+
 void targetFunctions() {
   if (targets.size() > 0) {
     for (int i = 0; i < targets.size(); i++) {

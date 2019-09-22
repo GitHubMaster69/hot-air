@@ -9,6 +9,7 @@ class AirBalloons {
   int shotsLeft = 5;
   int hp = 100;
   int score = 0;
+  int mapWins = 0;
 
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
@@ -26,7 +27,7 @@ class AirBalloons {
     fill(0, hp, 0);
     rect(25, -20, max(hp, 0), 10);    //powerthingy OwO
     images[14].resize(int(100*0.25), int(100*0.25));
-    image(images[14], -8,-27);
+    image(images[14], -8, -27);
     if ((0 > acceleration.y) && (acceleration.y < 0.15)) {
       images[6].resize(int(600*0.25), int(800*0.25));
       image(images[6], 0, 0);
@@ -66,7 +67,7 @@ class AirBalloons {
     bombs.add(new Bomb(6, 180.0+location.x, location.y+150, 300*((number-0.5)*2), 200, i));
   }
 
-  void checkEdges() {
+  void checkEdges(int i) {
     if (location.x > width-123) {
       location.x = width-123;
       acceleration.x = 0;
@@ -79,6 +80,11 @@ class AirBalloons {
     if (location.y > height-175) {
       velocity.y *= 0;
       location.y = height-175;
+      AirBalloons balloon = balloons.get(i);
+      AirBalloons balloon2 = balloons.get(int((i-1)*(-1)));
+      balloon2.mapWins++;
+      balloon.hp = 0;
+      restart();
       if (velocity.y > -3) {
         velocity.y = 0;
       }
