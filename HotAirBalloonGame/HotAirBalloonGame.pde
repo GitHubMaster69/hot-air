@@ -19,7 +19,7 @@ void setup() {
   balloons.add(new AirBalloons(width-400, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
-  targets.add(new Target(random(100, 900), random(100, height-100), 10, 5, 50));
+  targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
   restart();
 }
 
@@ -31,7 +31,7 @@ void draw() {
   bombFunctions();
   targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
-  cloudFunctions();
+  //cloudFunctions();
 }
 
 void loadImages() {
@@ -43,12 +43,10 @@ void loadImages() {
   }
 }
 
-void cloudFunctions(){
+void cloudFunctions() {
   for (int i = 0; i < clouds.size(); i++) {
-  Clouds cloud = clouds.get(i);
+    Clouds cloud = clouds.get(i);
     cloud.drawClouds(i);
-    
-    
   }
 }
 
@@ -86,11 +84,10 @@ void bombFunctions() {
     }
   }
 }
-void restart(){
- for (int i = 0; i < 8; i++) {
-  clouds.add(new Clouds(int(random(width/4,width*0.75)),int(random(50,height-50))));
-
- }
+void restart() {
+  for (int i = 0; i < 8; i++) {
+    clouds.add(new Clouds(int(random(width/4, width*0.75)), int(random(50, height-50))));
+  }
 }
 void targetFunctions() {
   if (targets.size() > 0) {

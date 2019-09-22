@@ -74,7 +74,7 @@ class Bomb {
     AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
     AirBalloons balloon2 = balloons.get(origin);
     Target target = targets.get(0);
-    if (location.x > balloon.location.x+20 && location.x < balloon.location.x+140 && location.y > balloon.location.y && location.y < balloon.location.y+280) {
+    if (location.x+(size/2) > balloon.location.x+60 && location.x-(size/2) < balloon.location.x+90 && location.y+(size/2) > balloon.location.y && location.y-(size/2) < balloon.location.y+280) {
       balloon.hp -= 10;
       bombs.remove(i);
       removed = true;
@@ -82,9 +82,9 @@ class Bomb {
       bombs.remove(i);
       removed = true;
       balloon2.score++;
-      println("boom");
+      println("player " + (2-balloon2.number) + " now has " + balloon2.score + " points");
       targets.remove(0);
-      targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10,10)),int(random(-5,5)), int(random(20,80))));
+      targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
     }
   }
 }

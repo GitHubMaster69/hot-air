@@ -7,7 +7,7 @@ class Target {
 
   Target(float x, float y, float xVel, float yVel, int s) {
     size = s;
-    location = new PVector(x, y);
+    location = new PVector(width/2, y);
     velocity = new PVector(xVel, -yVel);
   }
 
@@ -31,7 +31,6 @@ class Target {
     if (location.y > height-size/8) {
       velocity.y *= -1;
       location.y = height-size/2;
-
     } else if (location.y < size/2) {
       velocity.y *= -1;
       location.y = size/2;
