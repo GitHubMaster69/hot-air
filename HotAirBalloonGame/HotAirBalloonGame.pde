@@ -11,6 +11,7 @@ boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
 boolean restarted;
+boolean bottomLethal = false;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
 
 
 void setup() {
@@ -64,7 +65,7 @@ void balloonFunctions() {
     balloonAccel[i].y = 0;
     balloon.drawAirBalloon();
     if (shoot[i] && !done[1+(i*2)]) {
-      balloon.cannonShot(balloon.number);
+      balloon.cannonShot(balloon.ID);
       shoot[i] = false;
       done[1+(i*2)] = true;
     }

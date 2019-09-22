@@ -87,11 +87,11 @@ class Bomb {
       removed = true;
       balloon2.score++;
       if(balloon2.score >= 5){
-        text("player " + (2-balloon2.number) + " has won map 1", width/2, height/2);
+        text("player " + (2-balloon2.ID) + " has won map 1", width/2, height/2);
         restart();
         restarted = true;
       }
-      println("player " + (2-balloon2.number) + " now has " + balloon2.score + " points");
+      println("player " + (2-balloon2.ID) + " now has " + balloon2.score + " points");
       targets.remove(0);
       targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
     }
