@@ -8,23 +8,23 @@ class Bomb {
   float prevRotate;
   int origin;
 
-  Bomb(float m, float x, float y, float xVel, float yVel, int o){
+  Bomb(float m, float x, float y, float xVel, float yVel, int o) {
     mass = m;
     size = m*16;
-    location = new PVector(x,y);
-    velocity = new PVector(xVel/20,-yVel/12);
-    acceleration = new PVector(0,0);
+    location = new PVector(x, y);
+    velocity = new PVector(xVel/20, -yVel/12);
+    acceleration = new PVector(0, 0);
     origin = o;
   }
 
 
-  
-  
+
+
   void applyForce(PVector force) {
     PVector f = force;
     velocity.add(f);
   }
-  
+
 
   void update() {
     velocity.add(acceleration);
@@ -36,12 +36,12 @@ class Bomb {
     stroke(0);
     translate(location.x, location.y);
     rotate(radians(velocity.x+prevRotate));
-    fill(224,172,105);
-    rect(10,0,10,2); // ignition coil draw
+    fill(224, 172, 105);
+    rect(10, 0, 10, 2); // ignition coil draw
     fill(0);
-    ellipse(0,0,mass*4,mass*4); // bomb draw
-    fill(240,240,240);
-    ellipse(10,3,5,5); //bomb shadow (white) draw
+    ellipse(0, 0, mass*4, mass*4); // bomb draw
+    fill(240, 240, 240);
+    ellipse(10, 3, 5, 5); //bomb shadow (white) draw
     fill(175);
     rotate(-radians(velocity.x+prevRotate));
     prevRotate += velocity.x;
@@ -60,7 +60,7 @@ class Bomb {
     }
     if (location.y > height-size/8) {
       bombs.remove(i);
-      if(velocity.y > -3){
+      if (velocity.y > -3) {
         velocity.y = 0;
       }
     } else if (location.y < size/2) {
@@ -70,13 +70,21 @@ class Bomb {
     }
   }
 
-void checkCollision(int i){
-  AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
-  if(location.x > balloon.location.x+40 && location.x < balloon.location.x+220 && location.y > balloon.location.y && location.y < balloon.location.y+280){
-    balloon.hp -= 10;
-    bombs.remove(i);
-    removed = true;
+  void checkCollision(int i) {
+    AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
+    AirBalloons balloon2 = balloons.get(origin);
+    Target target = targets.get(0);
+    if (location.x > balloon.location.x+20 && location.x < balloon.location.x+140 && location.y > balloon.location.y && location.y < balloon.location.y+280) {
+      balloon.hp -= 10;
+      bombs.remove(i);
+      removed = true;
+    } else if (location.x > target.location.x+target.size/2 && location.x < target.location.x-target.size/2 && location.y > target.location.y+target.size/2 && location.y < target.location.y-target.size/2) {
+      bombs.remove(i);
+      removed = true;
+      balloon2.score++;
+      println("boom");
+      targets.remove(0);
+      targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10,10)),int(random(-5,5)), int(random(20,80))));
+    }
   }
-}
-
 }
