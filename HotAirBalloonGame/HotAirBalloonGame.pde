@@ -16,7 +16,7 @@ void setup() {
   size(1500, 800);
   //fullScreen(1);
   frameRate(60);
-  balloons.add(new AirBalloons(width-400, 100, 1));
+  balloons.add(new AirBalloons(width-250, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
   targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
@@ -31,7 +31,7 @@ void draw() {
   bombFunctions();
   targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
-  //cloudFunctions();
+  cloudFunctions();
 }
 
 void loadImages() {
