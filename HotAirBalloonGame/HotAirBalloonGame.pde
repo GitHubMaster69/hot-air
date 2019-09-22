@@ -1,4 +1,4 @@
-PImage[] images = new PImage[12];
+PImage[] images = new PImage[14];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 ArrayList<Target> targets = new ArrayList<Target>();
