@@ -23,7 +23,6 @@ class AirBalloons {
     image(images[number], 0, 0);
     images[5].resize(int(600*0.25), int(800*0.25));
     image(images[5], 0, 0);
-    println(acceleration.y);    
     fill(0,hp,0);
     rect(200,10,max(hp, 0),10);    //powerthingy OwO
     if ((0 > acceleration.y) && (acceleration.y < 0.15)){

@@ -78,7 +78,7 @@ class Bomb {
       balloon.hp -= 10;
       bombs.remove(i);
       removed = true;
-    } else if (location.x > target.location.x+target.size/2 && location.x < target.location.x-target.size/2 && location.y > target.location.y+target.size/2 && location.y < target.location.y-target.size/2) {
+    } else if (location.x > target.location.x-target.size/2 && location.x < target.location.x+target.size/2 && location.y > target.location.y-target.size/2 && location.y < target.location.y+target.size/2) {
       bombs.remove(i);
       removed = true;
       balloon2.score++;
