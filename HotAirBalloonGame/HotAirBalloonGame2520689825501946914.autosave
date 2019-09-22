@@ -1,4 +1,4 @@
-PImage[] images = new PImage[16];
+PImage[] images = new PImage[15];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 ArrayList<Target> targets = new ArrayList<Target>();
@@ -11,7 +11,6 @@ boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
 boolean restarted;
-boolean bottomLethal = false;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
 
 
 void setup() {
@@ -65,7 +64,7 @@ void balloonFunctions() {
     balloonAccel[i].y = 0;
     balloon.drawAirBalloon();
     if (shoot[i] && !done[1+(i*2)]) {
-      balloon.cannonShot(balloon.ID);
+      balloon.cannonShot(balloon.number);
       shoot[i] = false;
       done[1+(i*2)] = true;
     }
@@ -140,9 +139,6 @@ void keyPressed() {
   }
   if (key == 'q') {
     shoot[1] = true;
-  }
-   if (key == 'h') {
-    image(images[15],200,0);
   }
 }
 
