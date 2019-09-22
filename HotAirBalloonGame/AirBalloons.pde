@@ -64,7 +64,7 @@ class AirBalloons {
 
   void cannonShot(int i) {
     //Bomb bomb = bombs.get((number-1)*(-1));
-    bombs.add(new Bomb(6, 180.0+location.x, location.y+150, 300*((number-0.5)*2), 200, i));
+    bombs.add(new Bomb(6, location.x+45+(65*number), location.y+155, 300*((number-0.5)*2), 200, i));
   }
 
   void checkEdges(int i) {
