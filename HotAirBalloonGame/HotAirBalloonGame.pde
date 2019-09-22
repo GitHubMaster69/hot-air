@@ -16,10 +16,7 @@ void setup() {
   size(1500, 800);
   //fullScreen(1);
   frameRate(60);
-  balloons.add(new AirBalloons(width-250, 100, 1));
-  balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
-  targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
   restart();
 }
 
@@ -85,6 +82,9 @@ void bombFunctions() {
   }
 }
 void restart() {
+  balloons.add(new AirBalloons(width-250, 100, 1));
+  balloons.add(new AirBalloons(100, 100, 1));
+  targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
   for (int i = 0; i < 8; i++) {
     clouds.add(new Clouds(int(random(width/4, width*0.75)), int(random(50, height-50))));
   }
