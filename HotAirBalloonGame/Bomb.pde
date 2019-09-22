@@ -58,7 +58,7 @@ class Bomb {
       location.x = size/2;
       acceleration.x = 0;
     }
-    if (location.y > height-size/2) {
+    if (location.y > height-size/8) {
       bombs.remove(i);
       if(velocity.y > -3){
         velocity.y = 0;
@@ -72,7 +72,7 @@ class Bomb {
 
 void checkCollision(int i){
   AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
-  if(location.x > balloon.location.x+40 && location.x < balloon.location.x+220 && location.y > balloon.location.y+5 && location.y < balloon.location.y+280){
+  if(location.x > balloon.location.x+40 && location.x < balloon.location.x+220 && location.y > balloon.location.y && location.y < balloon.location.y+280){
     balloon.hp -= 10;
     bombs.remove(i);
     removed = true;

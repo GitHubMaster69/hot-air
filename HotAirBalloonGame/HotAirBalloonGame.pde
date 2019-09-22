@@ -1,6 +1,7 @@
 PImage[] images = new PImage[8];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+ArrayList<Target> targets = new ArrayList<Target>();
 PVector gravity = new PVector(0, 0.05);
 PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
@@ -11,12 +12,13 @@ boolean removed;
 
 
 void setup() {
-  size(1500,800);
+  size(1500, 800);
   //fullScreen(1);
   frameRate(60);
   balloons.add(new AirBalloons(width-400, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
+  targets.add(new Target(random(100, 900), random(100, height-100), 10, 5, 50));
 }
 
 void draw() {
@@ -25,6 +27,7 @@ void draw() {
   balloonAccel[1].x = 0; 
   balloonAccel[1].y = 0;
   bombFunctions();
+  targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
 }
 
@@ -64,10 +67,21 @@ void bombFunctions() {
       bomb.applyForce(bombGravity);
       bomb.update();
       bomb.checkCollision(i);
-      if(!removed){
-      bomb.checkEdges(i);
-    }
+      if (!removed) {
+        bomb.checkEdges(i);
+      }
       bomb.display();
+    }
+  }
+}
+
+void targetFunctions() {
+  if (targets.size() > 0) {
+    for (int i = 0; i < targets.size(); i++) {
+      Target target = targets.get(i);
+      target.update();
+      target.checkEdges(i);
+      target.display();
     }
   }
 }
