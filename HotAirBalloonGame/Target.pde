@@ -28,7 +28,7 @@ class Target {
       velocity.x *= -1;
       location.x = size/2;
     }
-    if (location.y > height-size/8) {
+    if (location.y > height-size/2) {
       velocity.y *= -1;
       location.y = height-size/2;
     } else if (location.y < size/2) {
