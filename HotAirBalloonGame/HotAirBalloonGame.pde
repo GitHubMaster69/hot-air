@@ -12,7 +12,7 @@ boolean[] done = new boolean[8];
 void setup() {
   size(1500,800);
   //fullScreen(1);
-  frameRate(144);
+  frameRate(60);
   balloons.add(new AirBalloons(width-400, 100, 1));
   balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
@@ -29,7 +29,7 @@ void draw() {
 
 void loadImages() {
   for (int i = 0; i < 2; i++) {
-    images[i] = loadImage(str(i) + ".png");
+    images[i] = loadImage(str(i) + ".PNG");
   }
   for (int i = 2; i < images.length; i++) {
     images[i] = loadImage(str(i) + ".png");
@@ -48,7 +48,7 @@ void balloonFunctions() {
     balloonAccel[i].y = 0;
     balloon.drawAirBalloon();
     if (shoot[i] && !done[1+(i*2)]) {
-      balloon.cannonShot();
+      balloon.cannonShot(balloon.number);
       shoot[i] = false;
       done[1+(i*2)] = true;
     }
@@ -62,6 +62,7 @@ void bombFunctions() {
       bomb.applyForce(bombGravity);
       bomb.update();
       bomb.checkEdges(i);
+      bomb.checkCollision(i);
       bomb.display();
     }
   }

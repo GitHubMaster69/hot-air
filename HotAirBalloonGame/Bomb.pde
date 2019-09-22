@@ -6,13 +6,15 @@ class Bomb {
   float mass;
   float size;
   float prevRotate;
+  int origin;
 
-  Bomb(float m, float x, float y, float xVel, float yVel){
+  Bomb(float m, float x, float y, float xVel, float yVel, int o){
     mass = m;
     size = m*16;
     location = new PVector(x,y);
     velocity = new PVector(xVel/20,-yVel/12);
     acceleration = new PVector(0,0);
+    origin = o;
   }
 
 
@@ -67,4 +69,13 @@ class Bomb {
       acceleration.y = 0;
     }
   }
+
+void checkCollision(int i){
+  AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
+  if(location.x > balloon.location.x+40 && location.x < balloon.location.x+140 && location.y > balloon.location.y+5 && location.y < balloon.location.y+280){
+    balloon.hp -= 10;
+    bombs.remove(i);
+  }
+}
+
 }
