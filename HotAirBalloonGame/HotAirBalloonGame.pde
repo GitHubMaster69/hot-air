@@ -1,7 +1,8 @@
-PImage[] images = new PImage[8];
+PImage[] images = new PImage[12];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 ArrayList<Target> targets = new ArrayList<Target>();
+ArrayList<Clouds> clouds = new ArrayList<Clouds>();
 PVector gravity = new PVector(0, 0.05);
 PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
@@ -19,6 +20,7 @@ void setup() {
   balloons.add(new AirBalloons(100, 100, 1));
   loadImages();
   targets.add(new Target(random(100, 900), random(100, height-100), 10, 5, 50));
+  restart();
 }
 
 void draw() {
@@ -29,6 +31,7 @@ void draw() {
   bombFunctions();
   targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
+  cloudFunctions();
 }
 
 void loadImages() {
@@ -37,6 +40,15 @@ void loadImages() {
   }
   for (int i = 2; i < images.length; i++) {
     images[i] = loadImage(str(i) + ".png");
+  }
+}
+
+void cloudFunctions(){
+  for (int i = 0; i < clouds.size(); i++) {
+  Clouds cloud = clouds.get(i);
+    cloud.drawClouds(i);
+    
+    
   }
 }
 
@@ -74,7 +86,12 @@ void bombFunctions() {
     }
   }
 }
+void restart(){
+ for (int i = 0; i < 8; i++) {
+  clouds.add(new Clouds(int(random(width/4,width*0.75)),int(random(50,height-50))));
 
+ }
+}
 void targetFunctions() {
   if (targets.size() > 0) {
     for (int i = 0; i < targets.size(); i++) {
