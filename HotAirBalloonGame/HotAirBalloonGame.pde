@@ -7,6 +7,7 @@ PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
 boolean[] keys = new boolean[6];
 boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
+boolean removed;
 
 
 void setup() {
@@ -59,10 +60,13 @@ void bombFunctions() {
   if (bombs.size() > 0) {
     for (int i = 0; i < bombs.size(); i++) {
       Bomb bomb = bombs.get(i);
+      removed = false;
       bomb.applyForce(bombGravity);
       bomb.update();
-      bomb.checkEdges(i);
       bomb.checkCollision(i);
+      if(!removed){
+      bomb.checkEdges(i);
+    }
       bomb.display();
     }
   }
