@@ -6,7 +6,7 @@ ArrayList<Clouds> clouds = new ArrayList<Clouds>();
 PVector gravity = new PVector(0, 0.05);
 PVector bombGravity = new PVector(0, 1);
 PVector[] balloonAccel = {new PVector(0, 0), new PVector(0, 0)};
-boolean[] keys = new boolean[6];
+boolean[] keys = new boolean[70];
 boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
@@ -36,6 +36,9 @@ void draw() {
   if(restarted){
     delay(2000);
     restarted = false;
+  }
+  if (keys[69] == true){
+    image(images[15],150,0);
   }
 }
 
@@ -144,7 +147,7 @@ void keyPressed() {
     shoot[1] = true;
   }
    if (key == 'h') {
-    image(images[15],150,0);
+    keys[69] = true;
   }
 }
 
@@ -177,4 +180,7 @@ void keyReleased() {
     shoot[1] = false;
     done[3] = false;
   }
+    if (key == 'h') {
+    keys[69] = false;
+    }
 }
