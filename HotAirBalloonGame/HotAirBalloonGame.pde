@@ -41,7 +41,7 @@ void draw() {
     restarted = false;
   }
   if (keys[69] == true) {
-    image(images[15], 150, 0);
+    image(images[15], 375, 0);
   }
 }
 
