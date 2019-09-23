@@ -93,6 +93,12 @@ class Bomb {
       balloon2.score++;
       if(balloon2.score >= 5){
         text("player " + (2-balloon2.ID) + " has won map 1", width/2, height/2);
+        balloon2.mapWins++;
+        println("anotha one");
+      balloon2.hp = 100;
+      balloon.hp = 100;
+      balloon2.score = 0;
+      balloon.score = 0;
         restart();
         restarted = true;
       }

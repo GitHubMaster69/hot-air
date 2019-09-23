@@ -11,16 +11,19 @@ boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
 boolean restarted;
-boolean bottomLethal = false;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
-boolean PvP = false;                         //Option to turn damaging each other off, such that the game instead is fully focused on getting the target.
-int reloadtime = 600;
+boolean bottomLethal = true;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
+boolean PvP = true;                         //Option to turn damaging each other off, such that the game instead is fully focused on getting the target.
+int reloadtime = 0;
 
 
 void setup() {
-  size(1500, 800);
-  //fullScreen(1);
+  //size(1500, 800);
+  fullScreen(1);
   frameRate(60);
   loadImages();
+  textSize(40);
+  balloons.add(new AirBalloons(width-250, 100, 1));
+  balloons.add(new AirBalloons(100, 100, 1));
   restart();
 }
 
@@ -31,14 +34,14 @@ void draw() {
   balloonAccel[1].y = 0;
   bombFunctions();
   targetFunctions();
-  text(((1000*frameCount)/millis()), 100, 100);
   cloudFunctions();
-  if(restarted){
+  balloonUI();
+  if (restarted) {
     delay(2000);
     restarted = false;
   }
-  if (keys[69] == true){
-    image(images[15],150,0);
+  if (keys[69] == true) {
+    image(images[15], 150, 0);
   }
 }
 
@@ -58,12 +61,12 @@ void cloudFunctions() {
   }
 }
 
-  
-  
-  
-  
-
-
+void balloonUI() {
+  for (int i = 0; i < balloons.size(); i++) {
+    AirBalloons balloon = balloons.get(i);
+    balloon.drawUI();
+  }
+}
 
 void balloonFunctions() {
   for (int i = 0; i < balloons.size(); i++) {
@@ -100,17 +103,26 @@ void bombFunctions() {
 }
 
 void restart() {
-  balloons.clear();
+  AirBalloons balloon1 = balloons.get(0);
+  AirBalloons balloon2 = balloons.get(1);
+  balloon1.location.x = width-250;
+  balloon2.location.x = 100;
+  balloon1.location.y = 100;
+  balloon2.location.y = 100;
+  balloon1.velocity = new PVector(0,0);
+  balloon2.velocity = new PVector(0,0);
+  balloon1.score = 0;
+  balloon2.score = 0;
+  balloon1.hp = 100;
+  balloon2.hp = 100;
   targets.clear();
   clouds.clear();
   bombs.clear();
-  balloons.add(new AirBalloons(width-250, 100, 1));
-  balloons.add(new AirBalloons(100, 100, 1));
   targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 12; i++) {
     clouds.add(new Clouds(int(random(width/4, width*0.75)), int(random(50, height-50))));
   }
-  if(frameCount > 100){
+  if (frameCount > 100) {
     restarted = true;
   }
 }
@@ -152,7 +164,7 @@ void keyPressed() {
   if (key == 'q') {
     shoot[1] = true;
   }
-   if (key == 'h') {
+  if (key == 'h') {
     keys[69] = true;
   }
 }
@@ -186,7 +198,7 @@ void keyReleased() {
     shoot[1] = false;
     done[3] = false;
   }
-    if (key == 'h') {
+  if (key == 'h') {
     keys[69] = false;
-    }
+  }
 }
