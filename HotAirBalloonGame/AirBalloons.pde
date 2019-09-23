@@ -10,8 +10,13 @@ public class AirBalloons {
   int hp = 100;
   int score = 0;
   int mapWins = 0;
+<<<<<<< HEAD
   
 }
+=======
+  int lastFired;
+
+>>>>>>> 8d3a74a466395eebd8279e2efe14ef2de9651f19
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
     speedMult = s;
@@ -66,8 +71,9 @@ public class AirBalloons {
   }
 
   void cannonShot(int i) {
-    //Bomb bomb = bombs.get((ID-1)*(-1));
     bombs.add(new Bomb(6, location.x+45+(65*ID), location.y+155, 300*((ID-0.5)*2), 200, i));
+    lastFired = millis();
+    }
   }
 
   void checkEdges(int i) {
