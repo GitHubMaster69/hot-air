@@ -144,7 +144,7 @@ void keyPressed() {
     shoot[1] = true;
   }
    if (key == 'h') {
-    image(images[15],200,0);
+    image(images[15],150,0);
   }
 }
 
