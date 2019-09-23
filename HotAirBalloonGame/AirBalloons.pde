@@ -1,4 +1,4 @@
-class AirBalloons {
+public class AirBalloons {
 
   PVector location;
   PVector velocity = new PVector(0, 0);
@@ -10,7 +10,8 @@ class AirBalloons {
   int hp = 100;
   int score = 0;
   int mapWins = 0;
-
+  
+}
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
     speedMult = s;
@@ -37,7 +38,9 @@ class AirBalloons {
     }
 
     translate(-location.x, -location.y);
-  }  
+  } 
+ 
+ 
 
 
   void update() {

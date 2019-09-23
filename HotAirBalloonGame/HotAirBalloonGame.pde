@@ -1,4 +1,4 @@
-PImage[] images = new PImage[16];
+PImage[] images = new PImage[18];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
 ArrayList<Target> targets = new ArrayList<Target>();
@@ -27,6 +27,7 @@ void draw() {
   balloonFunctions();
   balloonAccel[1].x = 0; 
   balloonAccel[1].y = 0;
+  UI();
   bombFunctions();
   targetFunctions();
   text(((1000*frameCount)/millis()), 100, 100);
@@ -53,6 +54,12 @@ void cloudFunctions() {
   }
 }
 
+  
+  
+  
+  
+
+
 
 void balloonFunctions() {
   for (int i = 0; i < balloons.size(); i++) {
@@ -63,6 +70,7 @@ void balloonFunctions() {
     balloon.applyForce(balloonAccel[i]);
     balloonAccel[i].x = 0; 
     balloonAccel[i].y = 0;
+    balloon.bUI();
     balloon.drawAirBalloon();
     if (shoot[i] && !done[1+(i*2)]) {
       balloon.cannonShot(balloon.ID);
