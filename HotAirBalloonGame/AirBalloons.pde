@@ -10,13 +10,9 @@ public class AirBalloons {
   int hp = 100;
   int score = 0;
   int mapWins = 0;
-<<<<<<< HEAD
-  
-}
-=======
+
   int lastFired;
 
->>>>>>> 8d3a74a466395eebd8279e2efe14ef2de9651f19
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
     speedMult = s;
