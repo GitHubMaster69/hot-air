@@ -12,6 +12,7 @@ boolean[] done = new boolean[8];
 boolean removed;
 boolean restarted;
 boolean bottomLethal = false;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
+boolean PvP = false;                         //Option to turn damaging each other off, such that the game instead is fully focused on getting the target.
 int reloadtime = 600;
 
 

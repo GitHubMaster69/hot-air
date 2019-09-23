@@ -64,7 +64,6 @@ class AirBalloons {
   }
 
   void cannonShot(int i) {
-    //Bomb bomb = bombs.get((ID-1)*(-1));
     if((millis()-lastFired) > 600){
     bombs.add(new Bomb(6, location.x+45+(65*ID), location.y+155, 300*((ID-0.5)*2), 200, i));
     lastFired = millis();

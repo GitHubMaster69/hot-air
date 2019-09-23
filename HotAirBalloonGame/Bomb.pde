@@ -74,6 +74,7 @@ class Bomb {
     AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
     AirBalloons balloon2 = balloons.get(origin);
     Target target = targets.get(0);
+    if(PvP){
     if (location.x+(size/2) > balloon.location.x+60 && location.x-(size/2) < balloon.location.x+90 && location.y+(size/2) > balloon.location.y && location.y-(size/2) < balloon.location.y+280) {
       balloon.hp -= 10;
       if(balloon.hp < 1){
@@ -84,7 +85,9 @@ class Bomb {
       bombs.remove(i);
       removed = true;
       }
-    } else if (location.x > target.location.x-target.size/2 && location.x < target.location.x+target.size/2 && location.y > target.location.y-target.size/2 && location.y < target.location.y+target.size/2) {
+    }
+    }
+    if (location.x > target.location.x-target.size/2 && location.x < target.location.x+target.size/2 && location.y > target.location.y-target.size/2 && location.y < target.location.y+target.size/2) {
       bombs.remove(i);
       removed = true;
       balloon2.score++;
@@ -93,7 +96,7 @@ class Bomb {
         restart();
         restarted = true;
       }
-      println("player " + (2-balloon2.ID) + " now has " + balloon2.score + " points");
+      println("player " + (2-balloon2.ID) + " now has " + balloon2.score + " point(s)");
       targets.remove(0);
       targets.add(new Target(random(100, width-100), int(random(100, height-100)), int(random(-10, 10)), int(random(-5, 5)), int(random(40, 80))));
     }
