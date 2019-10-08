@@ -100,7 +100,6 @@ class Bomb {
       balloon2.score = 0;
       balloon.score = 0;
         restart();
-        restarted = true;
       }
       println("player " + (2-balloon2.ID) + " now has " + balloon2.score + " point(s)");
       targets.remove(0);
