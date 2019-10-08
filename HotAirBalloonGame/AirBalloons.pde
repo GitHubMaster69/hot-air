@@ -92,8 +92,7 @@ public class AirBalloons {
       AirBalloons balloon2 = balloons.get(int((i-1)*(-1)));
       if(bottomLethal == true){
       balloon2.mapWins++;
-      balloon2.hp = 0;
-      restart();
+      restart(str(balloon2.ID), "Falling");
       }
       if (velocity.y > -3) {
         velocity.y = 0;

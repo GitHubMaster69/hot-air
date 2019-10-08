@@ -74,32 +74,32 @@ class Bomb {
     AirBalloons balloon = balloons.get(int((origin-1)*(-1)));
     AirBalloons balloon2 = balloons.get(origin);
     Target target = targets.get(0);
-    if(PvP){
-    if (location.x+(size/2) > balloon.location.x+60 && location.x-(size/2) < balloon.location.x+90 && location.y+(size/2) > balloon.location.y && location.y-(size/2) < balloon.location.y+280) {
-      balloon.hp -= 10;
-      if(balloon.hp < 1){
-        balloon2.mapWins++;
-        restart();
+    if (PvP) {
+      if (location.x+(size/2) > balloon.location.x+60 && location.x-(size/2) < balloon.location.x+90 && location.y+(size/2) > balloon.location.y && location.y-(size/2) < balloon.location.y+280) {
+        balloon.hp -= 10;
+        if (balloon.hp < 1) {
+          balloon2.mapWins++;
+          restart(str(balloon2.ID), "PvP");
+        }
+        if (bombs.size() > 0) {
+          bombs.remove(i);
+          removed = true;
+        }
       }
-      if(bombs.size() > 0){
-      bombs.remove(i);
-      removed = true;
-      }
-    }
     }
     if (location.x > target.location.x-target.size/2 && location.x < target.location.x+target.size/2 && location.y > target.location.y-target.size/2 && location.y < target.location.y+target.size/2) {
       bombs.remove(i);
       removed = true;
       balloon2.score++;
-      if(balloon2.score >= 5){
+      if (balloon2.score >= 5) {
         text("player " + (2-balloon2.ID) + " has won map 1", width/2, height/2);
         balloon2.mapWins++;
         println("anotha one");
-      balloon2.hp = 100;
-      balloon.hp = 100;
-      balloon2.score = 0;
-      balloon.score = 0;
-        restart();
+        balloon2.hp = 100;
+        balloon.hp = 100;
+        balloon2.score = 0;
+        balloon.score = 0;
+        restart(str(balloon2.ID), "Targets");
       }
       println("player " + (2-balloon2.ID) + " now has " + balloon2.score + " point(s)");
       targets.remove(0);

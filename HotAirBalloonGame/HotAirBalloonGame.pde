@@ -1,3 +1,7 @@
+import de.bezier.data.sql.*;
+
+SQLite db;
+
 PImage[] images = new PImage[18];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
@@ -15,17 +19,19 @@ boolean PvP = true;                         //Option to turn damaging each other
 int reloadtime = 0;
 boolean goTime = false;
 float speedMult = 1;
+int startTime = 0;
 
 
 void setup() {
-  //size(1500, 800);
-  fullScreen(1);
+  db = new SQLite( this, "userTests.sqlite");
+  size(1500, 800);
+  //fullScreen(1);
   frameRate(60);
   loadImages();
   textSize(40);
   balloons.add(new AirBalloons(width-250, 200, 1));
   balloons.add(new AirBalloons(100, 200, 1));
-  restart();
+  restart(null, null);
 }
 
 void draw() {
@@ -40,7 +46,6 @@ void draw() {
   if (keys[69] == true) {
     image(images[15], 375, 0);
   }
-  println("frame");
 }
 
 void loadImages() {
@@ -102,10 +107,16 @@ void bombFunctions() {
   }
 }
 
-void restart() {
-  goTime = false;
+void restart(String winner, String winType) {
   AirBalloons balloon1 = balloons.get(0);
   AirBalloons balloon2 = balloons.get(1);
+  if (db.connect()) {                                  // SQL data collecting to database in the data folder
+    if (winner != null && winType != null) {
+      db.query( "INSERT INTO mapResults ( timeTaken, winner, player1_hits, player2_hits, winType ) VALUES ( " + (millis()-startTime)/1000 + ", '" + winner + "', " + (100-balloon2.hp)/10 + ", " + (100-balloon1.hp)/10 + ", '" + winType + "' );");
+      println("data entry");
+    }
+  }
+  goTime = false;
   balloon1.location.x = width-250;
   balloon2.location.x = 100;
   balloon1.location.y = 200;
@@ -140,7 +151,10 @@ void targetFunctions() {
 
 
 void keyPressed() {
-  goTime = true;
+  if (goTime == false) {
+    goTime = true;
+    startTime = millis();
+  }
   if (keyCode == UP) {
     keys[0] = true;
   }
