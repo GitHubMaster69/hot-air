@@ -1,3 +1,7 @@
+import de.bezier.data.sql.*;
+
+SQLite db;
+
 PImage[] images = new PImage[18];
 ArrayList<AirBalloons> balloons = new ArrayList<AirBalloons>();
 ArrayList<Bomb> bombs = new ArrayList<Bomb>();
@@ -10,21 +14,24 @@ boolean[] keys = new boolean[70];
 boolean[] shoot = new boolean[2];
 boolean[] done = new boolean[8];
 boolean removed;
-boolean restarted;
 boolean bottomLethal = true;                //Testing option so you don't have to keep both afloat, could also be used for singleplayer.
 boolean PvP = true;                         //Option to turn damaging each other off, such that the game instead is fully focused on getting the target.
 int reloadtime = 0;
+boolean goTime = false;
+float speedMult = 1;
+int startTime = 0;
 
 
 void setup() {
-  //size(1500, 800);
-  fullScreen(1);
+  db = new SQLite( this, "userTests.sqlite");
+  size(1500, 800);
+  //fullScreen(1);
   frameRate(60);
   loadImages();
   textSize(40);
-  balloons.add(new AirBalloons(width-250, 100, 1));
-  balloons.add(new AirBalloons(100, 100, 1));
-  restart();
+  balloons.add(new AirBalloons(width-250, 200, 1));
+  balloons.add(new AirBalloons(100, 200, 1));
+  restart(null, null);
 }
 
 void draw() {
@@ -36,10 +43,6 @@ void draw() {
   targetFunctions();
   cloudFunctions();
   balloonUI();
-  if (restarted) {
-    delay(2000);
-    restarted = false;
-  }
   if (keys[69] == true) {
     image(images[15], 375, 0);
   }
@@ -71,18 +74,20 @@ void balloonUI() {
 void balloonFunctions() {
   for (int i = 0; i < balloons.size(); i++) {
     AirBalloons balloon = balloons.get(i);
-    balloon.update();
-    balloon.checkEdges(i);
-    balloon.applyForce(gravity);
-    balloon.applyForce(balloonAccel[i]);
-    balloonAccel[i].x = 0; 
-    balloonAccel[i].y = 0;
-    balloon.drawAirBalloon();
-    if (shoot[i] && !done[1+(i*2)]) {
-      balloon.cannonShot(balloon.ID);
-      shoot[i] = false;
-      done[1+(i*2)] = true;
+    if (goTime) {
+      balloon.update();
+      balloon.checkEdges(i);
+      balloon.applyForce(gravity);
+      balloon.applyForce(balloonAccel[i]);
+      balloonAccel[i].x = 0; 
+      balloonAccel[i].y = 0;
+      if (shoot[i] && !done[1+(i*2)]) {
+        balloon.cannonShot(balloon.ID);
+        shoot[i] = false;
+        done[1+(i*2)] = true;
+      }
     }
+    balloon.drawAirBalloon();
   }
 }
 
@@ -102,15 +107,22 @@ void bombFunctions() {
   }
 }
 
-void restart() {
+void restart(String winner, String winType) {
   AirBalloons balloon1 = balloons.get(0);
   AirBalloons balloon2 = balloons.get(1);
+  if (db.connect()) {                                  // SQL data collecting to database in the data folder
+    if (winner != null && winType != null) {
+      db.query( "INSERT INTO mapResults ( timeTaken, winner, player1_hits, player2_hits, winType ) VALUES ( " + (millis()-startTime)/1000 + ", '" + winner + "', " + (100-balloon2.hp)/10 + ", " + (100-balloon1.hp)/10 + ", '" + winType + "' );");
+      println("data entry");
+    }
+  }
+  goTime = false;
   balloon1.location.x = width-250;
   balloon2.location.x = 100;
-  balloon1.location.y = 100;
-  balloon2.location.y = 100;
-  balloon1.velocity = new PVector(0,0);
-  balloon2.velocity = new PVector(0,0);
+  balloon1.location.y = 200;
+  balloon2.location.y = 200;
+  balloon1.velocity = new PVector(0, 0);
+  balloon2.velocity = new PVector(0, 0);
   balloon1.score = 0;
   balloon2.score = 0;
   balloon1.hp = 100;
@@ -122,17 +134,16 @@ void restart() {
   for (int i = 0; i < 12; i++) {
     clouds.add(new Clouds(int(random(width/4, width*0.75)), int(random(50, height-50))));
   }
-  if (frameCount > 100) {
-    restarted = true;
-  }
 }
 
 void targetFunctions() {
   if (targets.size() > 0) {
     for (int i = 0; i < targets.size(); i++) {
       Target target = targets.get(i);
-      target.update();
-      target.checkEdges(i);
+      if (goTime) {
+        target.update();
+        target.checkEdges(i);
+      }
       target.display();
     }
   }
@@ -140,6 +151,10 @@ void targetFunctions() {
 
 
 void keyPressed() {
+  if (goTime == false) {
+    goTime = true;
+    startTime = millis();
+  }
   if (keyCode == UP) {
     keys[0] = true;
   }

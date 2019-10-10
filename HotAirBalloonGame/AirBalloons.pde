@@ -3,7 +3,6 @@ public class AirBalloons {
   PVector location;
   PVector velocity = new PVector(0, 0);
   PVector acceleration = new PVector(0, 0);
-  int speedMult;
   int ID;
   int hp = 100;
   int score = 0;
@@ -13,7 +12,6 @@ public class AirBalloons {
 
   AirBalloons(int x, int y, int s) { 
     location = new PVector(x, y);
-    speedMult = s;
     ID = balloons.size();
   }
   void drawAirBalloon() {
@@ -48,7 +46,9 @@ public class AirBalloons {
 
   void update() {
     velocity.add(acceleration);
+    velocity.x *= speedMult;
     location.add(velocity);
+    velocity.x *= (1/speedMult);
     velocity.mult(0.99);
     acceleration.mult(0.7);
     if (keys[0+(ID*3)] == true && !done[0+(ID*2)]) {
@@ -92,8 +92,7 @@ public class AirBalloons {
       AirBalloons balloon2 = balloons.get(int((i-1)*(-1)));
       if(bottomLethal == true){
       balloon2.mapWins++;
-      balloon2.hp = 0;
-      restart();
+      restart(str(balloon2.ID), "Falling");
       }
       if (velocity.y > -3) {
         velocity.y = 0;
