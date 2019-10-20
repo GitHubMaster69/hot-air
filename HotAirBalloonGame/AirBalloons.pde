@@ -39,7 +39,7 @@ public class AirBalloons {
  
  void drawUI(){
    fill(0);
-   text("Player" + (ID+1) + " Score: " + score,80+(((width/1.5)*((ID-1)*(-1)))),50);
+   text("Player" + (ID+1) + " Score: " + score + "/5",80+(((width/1.5)*((ID-1)*(-1)))),50);
    text("Player" + (ID+1) + " Mapwins: " + mapWins,80+(((width/1.5)*((ID-1)*(-1)))),100);
  }
 
@@ -52,7 +52,7 @@ public class AirBalloons {
     velocity.mult(0.99);
     acceleration.mult(0.7);
     if (keys[0+(ID*3)] == true && !done[0+(ID*2)]) {
-      acceleration.y += -0.01*hp;
+      acceleration.y += -0.01*hp*pumpPower;
       done[0+(ID*2)] = true;
     }
     if (keys[1+(ID*3)] == true) {

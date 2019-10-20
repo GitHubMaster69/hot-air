@@ -18,14 +18,15 @@ boolean bottomLethal = true;                //Testing option so you don't have t
 boolean PvP = true;                         //Option to turn damaging each other off, such that the game instead is fully focused on getting the target.
 int reloadtime = 0;
 boolean goTime = false;
-float speedMult = 1;
+float speedMult = 1.5;
+float pumpPower = 1.5;
 int startTime = 0;
 
 
 void setup() {
   db = new SQLite( this, "userTests.sqlite");
-  size(1500, 800);
-  //fullScreen(1);
+  //size(1500, 800);
+  fullScreen(1);
   frameRate(60);
   loadImages();
   textSize(40);

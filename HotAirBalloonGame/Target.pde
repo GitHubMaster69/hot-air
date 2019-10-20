@@ -12,7 +12,9 @@ class Target {
   }
 
   void update() {
+    velocity.x *= speedMult;
     location.add(velocity);
+    velocity.x *= (1/speedMult);
   }
 
   void display() {

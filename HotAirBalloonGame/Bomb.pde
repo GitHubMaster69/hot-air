@@ -12,7 +12,7 @@ class Bomb {
     mass = m;
     size = m*16;
     location = new PVector(x, y);
-    velocity = new PVector(xVel/20, -yVel/12);
+    velocity = new PVector(xVel/15, -yVel/12);
     acceleration = new PVector(0, 0);
     origin = o;
   }
